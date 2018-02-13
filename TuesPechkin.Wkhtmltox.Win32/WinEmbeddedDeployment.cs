@@ -18,7 +18,7 @@ namespace TuesPechkin
         {
             get
             {
-                return System.IO.Path.Combine(
+                return SysPath.Combine(
                     base.Path,
                     GetType().Assembly.GetName().Version.ToString());
             }
