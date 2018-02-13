@@ -23,12 +23,7 @@ namespace TuesPechkin
 
         public PdfToolset(IDeployment deployment)
         {
-            if (deployment == null)
-            {
-                throw new ArgumentNullException("deployment");
-            }
-
-            Deployment = deployment;
+            Deployment = deployment ?? throw new ArgumentNullException(nameof(deployment));
         }
 
         public void Load(IDeployment deployment = null)
@@ -55,10 +50,7 @@ namespace TuesPechkin
             {
                 WkhtmltoxBindings.wkhtmltopdf_deinit();
 
-                if (Unloaded != null)
-                {
-                    Unloaded(this, EventArgs.Empty);
-                }
+                Unloaded?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -283,14 +275,13 @@ namespace TuesPechkin
         {
             Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting converter result (wkhtmltopdf_get_output)");
 
-            IntPtr tmp;
-            var len = WkhtmltoxBindings.wkhtmltopdf_get_output(converter, out tmp);
+            var len = WkhtmltoxBindings.wkhtmltopdf_get_output(converter, out IntPtr tmp);
             var output = new byte[len];
             Marshal.Copy(tmp, output, 0, output.Length);
             return output;
         }
         #endregion
 
-        private DelegateRegistry pinnedCallbacks = new DelegateRegistry();
+        private readonly DelegateRegistry pinnedCallbacks = new DelegateRegistry();
     }
 }

@@ -11,12 +11,7 @@ namespace TuesPechkin
 
         public StaticDeployment(string path)
         {
-            if (path == null)
-            {
-                throw new ArgumentNullException("path");
-            }
-
-            Path = path;
+            Path = path ?? throw new ArgumentNullException(nameof(path));
         }
     }
 }

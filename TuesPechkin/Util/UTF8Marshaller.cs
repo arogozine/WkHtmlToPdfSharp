@@ -17,7 +17,7 @@ namespace TuesPechkin
                 return IntPtr.Zero;
             if (!(managedObj is string))
                 throw new MarshalDirectiveException(
-                       "UTF8Marshaler must be used on a string.");
+                       nameof(Utf8Marshaler) + " must be used on a string.");
 
             // not null terminated
             byte[] strbuf = Encoding.UTF8.GetBytes((string)managedObj);
@@ -25,7 +25,7 @@ namespace TuesPechkin
             Marshal.Copy(strbuf, 0, buffer, strbuf.Length);
 
             // write the terminating null
-            Marshal.WriteByte(new IntPtr(buffer.ToInt64() + (long)strbuf.Length), 0);
+            Marshal.WriteByte(new IntPtr(buffer.ToInt64() + strbuf.Length), 0);
             return buffer;
         }
 

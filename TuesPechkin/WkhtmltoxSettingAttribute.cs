@@ -8,7 +8,7 @@ namespace TuesPechkin
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class WkhtmltoxSettingAttribute : Attribute
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public WkhtmltoxSettingAttribute(string name)
         {

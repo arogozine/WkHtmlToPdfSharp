@@ -16,12 +16,7 @@ namespace TuesPechkin
 
         public StandardConverter(IToolset toolset)
         {
-            if (toolset == null)
-            {
-                throw new ArgumentNullException("toolset");
-            }
-
-            Toolset = toolset;
+            Toolset = toolset ?? throw new ArgumentNullException(nameof(toolset));
 
             Tracer.Trace(string.Format("T:{0} Created StandardConverter", Thread.CurrentThread.Name));
         }
@@ -189,10 +184,7 @@ namespace TuesPechkin
                     ProgressDescription = progressDescription
                 };
 
-                if (ProgressChange != null)
-                {
-                    ProgressChange(this, args);
-                }
+                ProgressChange?.Invoke(this, args);
             }
             catch (Exception e)
             {
@@ -274,9 +266,9 @@ namespace TuesPechkin
 
                     Apply(config, attribute.Name, rawValue, isGlobal);
                 }
-                else if (rawValue is ISettings)
+                else if (rawValue is ISettings iSettings)
                 {
-                    ApplySettingsToConfig(config, rawValue as ISettings, isGlobal);
+                    ApplySettingsToConfig(config, iSettings, isGlobal);
                 }
             }
         }

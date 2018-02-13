@@ -33,12 +33,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.footer = value;
+                this.footer = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -50,12 +45,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.header = value;
+                this.header = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -69,7 +59,7 @@ namespace TuesPechkin
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
                 }
 
                 this.data = System.Text.Encoding.UTF8.GetBytes(value);
@@ -84,12 +74,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.load = value;
+                this.load = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -102,12 +87,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.data = value;
+                this.data = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -119,12 +99,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.web = value;
+                this.web = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 

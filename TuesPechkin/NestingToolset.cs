@@ -28,10 +28,7 @@ namespace TuesPechkin
 
         internal void OnBeforeUnload(object sender)
         {
-            if (BeforeUnload != null)
-            {
-                BeforeUnload(sender, EventArgs.Empty);
-            }
+            BeforeUnload?.Invoke(sender, EventArgs.Empty);
         }
 
         public void AddObject(IntPtr converter, IntPtr objectConfig, byte[] html)

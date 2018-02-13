@@ -10,9 +10,7 @@ namespace TuesPechkin
 
         public void Register(IntPtr converter, Delegate callback)
         {
-            List<Delegate> delegates;
-
-            if (!registry.TryGetValue(converter, out delegates))
+            if (!registry.TryGetValue(converter, out List<Delegate> delegates))
             {
                 delegates = new List<Delegate>();
                 registry.Add(converter, delegates);

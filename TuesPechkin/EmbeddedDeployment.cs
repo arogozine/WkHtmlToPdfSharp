@@ -50,12 +50,7 @@ namespace TuesPechkin
 
         public EmbeddedDeployment(IDeployment physical)
         {
-            if (physical == null)
-            {
-                throw new ArgumentException("physical");
-            }
-
-            this.physical = physical;
+            this.physical = physical ?? throw new ArgumentException(nameof(physical));
         }
 
         protected IDeployment physical;

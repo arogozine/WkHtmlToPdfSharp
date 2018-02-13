@@ -16,9 +16,9 @@ namespace TuesPechkin
                 new Thread(() => StopThread()).Start();
             };
 
-            if (toolset is NestingToolset)
+            if (toolset is NestingToolset nestingToolset)
             {
-                (toolset as NestingToolset).BeforeUnload += (sender, args) =>
+                nestingToolset.BeforeUnload += (sender, args) =>
                 {
                     Invoke(sender as ActionShim);
                 };

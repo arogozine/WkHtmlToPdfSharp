@@ -15,12 +15,7 @@ namespace TuesPechkin
     {
         public RemotingToolset(IDeployment deployment)
         {
-            if (deployment == null)
-            {
-                throw new ArgumentNullException("deployment");
-            }
-
-            Deployment = deployment;
+            Deployment = deployment ?? throw new ArgumentNullException(nameof(deployment));
         }
 
         public override void Load(IDeployment deployment = null)
@@ -115,10 +110,7 @@ namespace TuesPechkin
             remoteDomain = null;
             Loaded = false;
 
-            if (Unloaded != null)
-            {
-                Unloaded(this, EventArgs.Empty);
-            }
+            Unloaded?.Invoke(this, EventArgs.Empty);
         }
     }
 }

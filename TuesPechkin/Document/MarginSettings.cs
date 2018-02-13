@@ -9,7 +9,7 @@ namespace TuesPechkin
     {
         public MarginSettings()
         {
-            this.Unit = TuesPechkin.Unit.Millimeters;
+            this.Unit = Unit.Millimeters;
         }
 
         public MarginSettings(double top, double right, double bottom, double left) : this()
