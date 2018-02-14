@@ -32,12 +32,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.global = value;
+                this.global = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 

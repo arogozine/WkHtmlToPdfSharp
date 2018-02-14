@@ -89,12 +89,7 @@ namespace TuesPechkin
             }
             set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.margins = value;
+                this.margins = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -185,26 +180,17 @@ namespace TuesPechkin
         /// The height of the output document, e.g. "12in".
         /// </summary>
         [WkhtmltoxSetting("size.height")]
-        internal string PaperHeight
-        {
-            get
-            {
-                return this.PaperSize == null ? null : this.PaperSize.Height;
-            }
-        }
+        internal string PaperHeight => PaperSize?.Height;
 
         /// <summary>
         /// The with of the output document, e.g. "4cm".
         /// </summary>
         [WkhtmltoxSetting("size.width")]
-        internal string PaperWidth
-        {
-            get
-            {
-                return this.PaperSize == null ? null : this.PaperSize.Width;
-            }
-        }
+        internal string PaperWidth => PaperSize?.Width;
 
+        /// <summary>
+        /// Should the output be printed in color or gray scale, must be either "Color" or "Grayscale"
+        /// </summary>
         [WkhtmltoxSetting("colorMode")]
         internal string StringColorMode
         {

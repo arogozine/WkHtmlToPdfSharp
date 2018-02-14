@@ -7,21 +7,39 @@ namespace TuesPechkin
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class ObjectSettings : IObject
     {
+        /// <summary>
+        /// Should the sections from this document be included in the outline and table of content?
+        /// </summary>
         [WkhtmltoxSetting("includeInOutline")]
         public bool? IncludeInOutline { get; set; }
 
+        /// <summary>
+        /// Should we count the pages of this document, in the counter used for TOC, headers and footers?
+        /// </summary>
         [WkhtmltoxSetting("pagesCount")]
         public bool? CountPages { get; set; }
 
+        /// <summary>
+        /// The URL or path of the web page to convert, if "-" input is read from stdin.
+        /// </summary>
         [WkhtmltoxSetting("page")]
         public string PageUrl { get; set; }
 
-        [WkhtmltoxSetting("produceForms")]
+        /// <summary>
+        /// Should we turn HTML forms into PDF forms? Must be either "true" or file".
+        /// </summary>
+        [WkhtmltoxSetting("produceForms")] // TODO
         public bool? ProduceForms { get; set; }
 
+        /// <summary>
+        /// Should external links in the HTML document be converted into external pdf links?
+        /// </summary>
         [WkhtmltoxSetting("useExternalLinks")]
         public bool? ProduceExternalLinks { get; set; }
 
+        /// <summary>
+        /// Should internal links in the HTML document be converted into pdf references?
+        /// </summary>
         [WkhtmltoxSetting("useLocalLinks")]
         public bool? ProduceLocalLinks { get; set; }
 
