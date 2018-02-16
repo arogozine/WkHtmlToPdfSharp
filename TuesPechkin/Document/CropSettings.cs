@@ -7,13 +7,16 @@ namespace TuesPechkin
     public class CropSettings : ISettings
     {
         /// <summary>
+        /// left/x coordinate of the window to capture in pixels
+        /// </summary>
+        [WkhtmltoxSetting("crop.left")]
+        public double? Left { get; set; }
+
+        /// <summary>
         /// top/y coordinate of the window to capture in pixels
         /// </summary>
         [WkhtmltoxSetting("crop.top")]
         public double? Top { get; set; }
-
-        [WkhtmltoxSetting("crop.bottom")]
-        public double? Bottom { get; set; } // ?
 
         /// <summary>
         /// Width of the window to capture in pixels
@@ -26,9 +29,5 @@ namespace TuesPechkin
         /// </summary>
         [WkhtmltoxSetting("crop.height")]
         public double? Height { get; set; }
-
-        // TODO:
-        // left/x coordinate of the window to capture in pixels
-        // crop.left
     }
 }

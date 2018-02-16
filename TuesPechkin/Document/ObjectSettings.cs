@@ -26,9 +26,9 @@ namespace TuesPechkin
         public string PageUrl { get; set; }
 
         /// <summary>
-        /// Should we turn HTML forms into PDF forms? Must be either "true" or file".
+        /// Should we turn HTML forms into PDF forms?
         /// </summary>
-        [WkhtmltoxSetting("produceForms")] // TODO
+        [WkhtmltoxSetting("produceForms")]
         public bool? ProduceForms { get; set; }
 
         /// <summary>

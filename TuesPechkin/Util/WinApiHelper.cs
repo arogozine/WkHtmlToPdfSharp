@@ -8,10 +8,10 @@ namespace TuesPechkin
         [DllImport("kernel32", SetLastError = true)]
         public static extern bool FreeLibrary(IntPtr hModule);
 
-        [DllImport("kernel32", SetLastError = true)]
+        [DllImport("kernel32", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
         public static extern IntPtr LoadLibrary(string filename);
 
-        [DllImport("kernel32", SetLastError = true)]
+        [DllImport("kernel32", CharSet = CharSet.Unicode, BestFitMapping = false, SetLastError = true)]
         public static extern bool SetDllDirectory(string lpPathName);
     }
 }
