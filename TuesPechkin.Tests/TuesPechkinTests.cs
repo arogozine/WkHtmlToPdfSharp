@@ -22,12 +22,7 @@ namespace TuesPechkin.Tests
             Debug.Listeners.Add(new DefaultTraceListener());
 
             toolset =
-                new RemotingToolset<PdfToolset>(
-                    new StaticDeployment(
-                        Path.Combine(
-                            AppDomain.CurrentDomain.BaseDirectory,
-                            "wk-ver",
-                            TEST_WK_VER)));
+                new RemotingToolset<PdfToolset>(GetNewDeployment());
 
             converter = new ThreadSafeConverter(toolset);
         }

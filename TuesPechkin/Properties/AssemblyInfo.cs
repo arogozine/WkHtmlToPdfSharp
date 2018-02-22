@@ -10,3 +10,4 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 [assembly: Guid("11f63696-7105-436d-9ec6-2fee54c40b11")]
+[assembly: InternalsVisibleTo("TuesPechkin.Tests")]

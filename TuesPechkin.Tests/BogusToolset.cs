@@ -12,10 +12,7 @@ namespace TuesPechkin.Tests
 
         public void Unload()
         {
-            if (Unloaded != null)
-            {
-                Unloaded(this, EventArgs.Empty);
-            }
+            Unloaded?.Invoke(this, EventArgs.Empty);
         }
 
         public void Load(IDeployment deployment = null)
