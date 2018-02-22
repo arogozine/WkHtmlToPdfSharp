@@ -64,9 +64,8 @@ namespace TuesPechkin.Tests
             {
                 switch (setting.Key)
                 {
-                    // Doesn't work ?
+                    // Doesn't work until 0.12.5
                     case "outlineDepth":
-                    case "outputFormat":
                         continue;
                 }
 

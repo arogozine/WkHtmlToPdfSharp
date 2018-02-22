@@ -16,12 +16,6 @@ namespace TuesPechkin
             Grayscale
         }
 
-        public enum DocumentOutputFormat
-        {
-            PDF,
-            PS
-        }
-
         public enum PaperOrientation
         {
             Portrait,
@@ -110,12 +104,6 @@ namespace TuesPechkin
         /// </summary>
         [WkhtmltoxSetting("out")]
         public string OutputFile { get; set; }
-
-        /// <summary>
-        /// Whether to output PDF or PostScript. (Default: PDF)
-        /// </summary>
-        [WkhtmltoxSetting("outputFormat")]
-        public DocumentOutputFormat? OutputFormat { get; set; }
 
         /// <summary>
         /// A number that is added to all page numbers when printing headers, footers and table of content.
