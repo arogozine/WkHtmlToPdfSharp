@@ -17,6 +17,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(EventSubscriptionTests))]
         public void BeginDoesNotBlockConversion()
         {
             var count = 0;
@@ -27,6 +28,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(EventSubscriptionTests))]
         public void ErrorDoesNotBlockConversion()
         {
             var count = 0;
@@ -46,6 +48,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(EventSubscriptionTests))]
         public void FinishDoesNotBlockConversion()
         {
             var count = 0;
@@ -56,6 +59,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(EventSubscriptionTests))]
         public void PhaseChangeDoesNotBlockConversion()
         {
             var count = 0;
@@ -66,6 +70,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(EventSubscriptionTests))]
         public void ProgressChangeDoesNotBlockConversion()
         {
             var count = 0;
@@ -76,6 +81,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(EventSubscriptionTests))]
         public void WarningDoesNotBlockConversion()
         {
             var count = 0;

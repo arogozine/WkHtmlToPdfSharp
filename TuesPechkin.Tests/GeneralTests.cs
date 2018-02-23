@@ -13,6 +13,7 @@ namespace TuesPechkin.Tests
     public class GeneralTests : TuesPechkinTests
     {
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void BubblesExceptionsFromSyncedThread()
         {
             var toolset = new BogusToolset();
@@ -29,6 +30,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void ConvertsAfterAppDomainRecycles()
         {
             // arrange
@@ -73,6 +75,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void HandlesConcurrentThreads()
         {
             int numberOfTasks = 10;
@@ -96,6 +99,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void TwoSequentialConversionsFromString()
         {
             byte[] result = null;
@@ -110,6 +114,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void MultipleObjectConversionFromString()
         {            
             // See: https://github.com/wkhtmltopdf/wkhtmltopdf/issues/1790
@@ -120,6 +125,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void TwoSequentialConversionsFromUrl()
         {
             byte[] result = null;
@@ -134,6 +140,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void MultipleObjectConversionFromUrl()
         {
             var result = converter.Convert(Document(UrlObject(), UrlObject()));
@@ -142,6 +149,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void ResultIsPdf()
         {
             string html = GetResourceString("PechkinTests.Resources.page.html");
@@ -164,6 +172,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void ReturnsResultFromFile()
         {
             string html = GetResourceString("PechkinTests.Resources.page.html");
@@ -189,6 +198,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void ReturnsResultFromString()
         {
             var document = new HtmlToPdfDocument("<p>some html</p>");
@@ -199,6 +209,7 @@ namespace TuesPechkin.Tests
         }
 
         [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
         public void UnloadsWkhtmltoxWhenAppDomainUnloads()
         {
             // arrange
