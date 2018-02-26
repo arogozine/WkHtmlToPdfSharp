@@ -43,6 +43,7 @@ namespace TuesPechkin
         void DestroyConverter(IntPtr converter);
         byte[] GetConverterResult(IntPtr converter);
         string GetGlobalSetting(IntPtr setting, string name);
+        string GetVersion();
         int GetHttpErrorCode(IntPtr converter);
         string GetObjectSetting(IntPtr setting, string name);
         int GetPhaseCount(IntPtr converter);

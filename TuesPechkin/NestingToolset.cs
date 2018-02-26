@@ -140,5 +140,10 @@ namespace TuesPechkin
         {
             NestedToolset.SetWarningCallback(converter, callback);
         }
+
+        public string GetVersion()
+        {
+            return NestedToolset.GetVersion();
+        }
     }
 }

@@ -58,19 +58,19 @@ namespace TuesPechkin.Tests
             IToolset toolset = GetToolset();
 
             IntPtr globalSettings = toolset.CreateGlobalSettings();
-            var globalSettingOptions = ReflectGlobalSettings();
+            var globalSettingOptions = GetSettings<GlobalSettings>();
 
-            foreach (var setting in globalSettingOptions)
+            foreach (var (key, type) in globalSettingOptions)
             {
-                switch (setting.Key)
+                switch (key)
                 {
                     // Doesn't work until 0.12.5
                     case "outlineDepth":
                         continue;
                 }
 
-                string settingValue = toolset.GetGlobalSetting(globalSettings, setting.Key);
-                int setResult = toolset.SetGlobalSetting(globalSettings, setting.Key, settingValue);
+                string settingValue = toolset.GetGlobalSetting(globalSettings, key);
+                int setResult = toolset.SetGlobalSetting(globalSettings, key, settingValue);
                 Assert.AreEqual(setResult, 1);
             }
         }
@@ -104,24 +104,6 @@ namespace TuesPechkin.Tests
             {
                 yield return value;
             }
-        }
-
-        private static Dictionary<string, Type> ReflectGlobalSettings()
-        {
-            var globalSettings = from prop in typeof(GlobalSettings).GetProperties()
-                                 let attrs = prop.GetCustomAttributes(typeof(WkhtmltoxSettingAttribute), true)
-                                 where attrs.Length != 0
-                                 select new
-                                 {
-                                     ((WkhtmltoxSettingAttribute)attrs[0]).Name,
-                                     prop.PropertyType
-                                 };
-            var dict = new Dictionary<string, Type>();
-            foreach (var setting in globalSettings)
-            {
-                dict.Add(setting.Name, setting.PropertyType);
-            }
-            return dict;
         }
 
         private static IEnumerable<(string, Type)> GetSettings<T>()

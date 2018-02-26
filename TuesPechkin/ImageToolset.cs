@@ -242,6 +242,28 @@ namespace TuesPechkin
             Marshal.Copy(tmp, output, 0, output.Length);
             return output;
         }
+
+        public unsafe string GetVersion()
+        {
+            Tracer.Trace("T:" + Thread.CurrentThread.Name +
+                " Getting WkHtmlToPdf version (" +
+                nameof(WkhtmltoxBindings.wkhtmltoimage_version) +
+                ")");
+
+            IntPtr versionPtr = WkhtmltoxBindings.wkhtmltoimage_version();
+
+            byte* bytes = (byte*)versionPtr;
+            int size = 0;
+            while (bytes[size] != 0)
+            {
+                ++size;
+            }
+            byte[] buffer = new byte[size];
+            Marshal.Copy(versionPtr, buffer, 0, size);
+
+            return Encoding.UTF8.GetString(buffer);
+        }
+
         #endregion
 
         private readonly DelegateRegistry pinnedCallbacks = new DelegateRegistry();

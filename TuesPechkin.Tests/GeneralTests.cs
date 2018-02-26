@@ -237,5 +237,29 @@ namespace TuesPechkin.Tests
                 .Cast<ProcessModule>()
                 .Any(m => m.ModuleName == "wkhtmltox.dll"));
         }
+
+        [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
+        public void PdfVersionWorks() {
+            IToolset toolset = GetNewToolset();
+            toolset.Load();
+            string version = toolset.GetVersion();
+
+            Assert.IsNotNull(version);
+            Assert.AreNotEqual(version, string.Empty);
+        }
+
+
+        [TestMethod]
+        [TestCategory(nameof(GeneralTests))]
+        public void ImageVersionWorks()
+        {
+            IToolset toolset = new ImageToolset(GetNewDeployment());
+            toolset.Load();
+            string version = toolset.GetVersion();
+
+            Assert.IsNotNull(version);
+            Assert.AreNotEqual(version, string.Empty);
+        }
     }
 }

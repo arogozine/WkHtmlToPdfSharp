@@ -60,6 +60,28 @@ namespace TuesPechkin
         }
 
         #region Rest of IToolset stuff
+
+        public unsafe string GetVersion()
+        {
+            Tracer.Trace("T:" + Thread.CurrentThread.Name + 
+                " Getting WkHtmlToPdf version (" +
+                nameof(WkhtmltoxBindings.wkhtmltopdf_version) +
+                ")");
+
+            IntPtr versionPtr = WkhtmltoxBindings.wkhtmltopdf_version();
+
+            byte* bytes = (byte*)versionPtr;
+            int size = 0;
+            while (bytes[size] != 0)
+            {
+                ++size;
+            }
+            byte[] buffer = new byte[size];
+            Marshal.Copy(versionPtr, buffer, 0, size);
+
+            return Encoding.UTF8.GetString(buffer);
+        }
+
         public IntPtr CreateGlobalSettings()
         {
             Tracer.Trace("T:" + Thread.CurrentThread.Name + " Creating global settings (wkhtmltopdf_create_global_settings)");

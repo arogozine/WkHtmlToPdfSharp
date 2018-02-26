@@ -149,5 +149,10 @@ namespace TuesPechkin.Tests
         {
             throw new NotImplementedException();
         }
+
+        public string GetVersion()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

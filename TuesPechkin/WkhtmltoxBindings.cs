@@ -14,6 +14,9 @@ namespace TuesPechkin
 
         #region pdf bindings
         [DllImport(DLLNAME, CharSet = CHARSET)]
+        public static extern IntPtr wkhtmltopdf_version();
+
+        [DllImport(DLLNAME, CharSet = CHARSET)]
         public static extern void wkhtmltopdf_add_object(IntPtr converter, IntPtr objectSettings,
             [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Utf8Marshaler))]
             String data);
@@ -111,6 +114,9 @@ namespace TuesPechkin
         #endregion
 
         #region image bindings
+        [DllImport(DLLNAME, CharSet = CHARSET)]
+        public static extern IntPtr wkhtmltoimage_version();
+
         [DllImport(DLLNAME, CharSet = CHARSET)]
         public static extern int wkhtmltoimage_convert(IntPtr converter);
 
