@@ -75,7 +75,6 @@ namespace TuesPechkin.Tests
             }
         }
 
-
         [TestMethod]
         [TestCategory(nameof(SettingsSaveTests))]
         public void ObjectSettingsSave()
@@ -90,6 +89,27 @@ namespace TuesPechkin.Tests
                 int setResult = toolset.SetObjectSetting(objectSettings, key, settingValue);
                 Assert.AreEqual(setResult, 1);
             }
+        }
+
+        [TestMethod]
+        [TestCategory(nameof(SettingsSaveTests))]
+        public void GetReturnsSetValue()
+        {
+            IToolset toolset = GetToolset();
+            IntPtr objectSettings = toolset.CreateObjectSettings();
+
+            int setResult = toolset.SetObjectSetting(objectSettings, "header.fontName", "Courier New");
+            Assert.AreEqual(setResult, 1);
+
+            string fontName = toolset.GetObjectSetting(objectSettings, "header.fontName");
+            Assert.AreEqual(fontName, "Courier New");
+
+            IntPtr globalSettings = toolset.CreateGlobalSettings();
+            setResult = toolset.SetGlobalSetting(globalSettings, "documentTitle", "Test 1234");
+            Assert.AreEqual(setResult, 1);
+
+            string documentTitle = toolset.GetGlobalSetting(globalSettings, "documentTitle");
+            Assert.AreEqual(documentTitle, "Test 1234");
         }
 
         private static IEnumerable<(string, Type)> ReflectObjectSettings()

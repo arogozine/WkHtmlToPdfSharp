@@ -121,7 +121,7 @@ namespace TuesPechkin
             }
         }
 
-        public byte[] GetData()
+        public byte[] GetHtmlInputBinary()
         {
             return RawData;
         }

@@ -220,22 +220,22 @@ namespace TuesPechkin
             var converter = IntPtr.Zero;
 
             {
-                var config = Toolset.CreateGlobalSettings();
+                IntPtr config = Toolset.CreateGlobalSettings();
 
                 ApplySettingsToConfig(config, document, true);
 
                 converter = Toolset.CreateConverter(config);
             }
 
-            foreach (var setting in document.GetObjects())
+            foreach (IObject setting in document.GetObjects())
             {
                 if (setting != null)
                 {
-                    var config = Toolset.CreateObjectSettings();
+                    IntPtr config = Toolset.CreateObjectSettings();
 
                     ApplySettingsToConfig(config, setting, false);
 
-                    Toolset.AddObject(converter, config, setting.GetData());
+                    Toolset.AddObject(converter, config, setting.GetHtmlInputBinary());
                 }
             }
 

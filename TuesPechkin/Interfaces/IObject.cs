@@ -6,6 +6,6 @@ namespace TuesPechkin
 {
     public interface IObject : ISettings
     {
-        byte[] GetData();
+        byte[] GetHtmlInputBinary();
     }
 }
