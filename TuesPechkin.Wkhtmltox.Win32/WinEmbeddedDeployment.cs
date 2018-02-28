@@ -24,16 +24,15 @@ namespace TuesPechkin
             }
         }
 
-        protected override IEnumerable<KeyValuePair<string, Stream>> GetContents()
+
+        protected override (string, Stream) GetContents()
         {
-            return new []
-            { 
-                new KeyValuePair<string, Stream>(
-                    key: WkhtmltoxBindings.DLLNAME,
-                    value: new GZipStream(
-                        new MemoryStream(Resources.wkhtmltox_32_dll), 
-                        CompressionMode.Decompress))
-            };
+            var key = WkhtmltoxBindings.DLLNAME;
+            var value = new GZipStream(
+                        new MemoryStream(Resources.wkhtmltox_32_dll),
+                        CompressionMode.Decompress);
+
+            return (key, value);
         }
     }
 }

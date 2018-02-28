@@ -21,15 +21,15 @@ namespace TuesPechkin
                         Directory.CreateDirectory(path);
                     }
 
-                    foreach (var nameAndContents in GetContents())
-                    {
-                        var filename = System.IO.Path.Combine(path, nameAndContents.Key);
+                    var (name, stream) = GetContents();
+                    
+                    var filename = System.IO.Path.Combine(path, name);
 
-                        if (!File.Exists(filename))
-                        {
-                            WriteStreamToFile(filename, nameAndContents.Value);
-                        }
+                    if (!File.Exists(filename))
+                    {
+                        WriteStreamToFile(filename, stream);
                     }
+                    
 
                     deployed = true;
                 }
@@ -55,7 +55,7 @@ namespace TuesPechkin
 
         protected IDeployment physical;
 
-        protected abstract IEnumerable<KeyValuePair<string, Stream>> GetContents();
+        protected abstract (string, Stream) GetContents();
 
         private bool deployed;
 
