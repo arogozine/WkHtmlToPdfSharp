@@ -32,7 +32,7 @@ namespace TuesPechkin
 
             SetupAppDomain();
 
-            var handle = Activator.CreateInstanceFrom(
+            ObjectHandle handle = Activator.CreateInstanceFrom(
                 remoteDomain,
                 typeof(TToolset).Assembly.Location,
                 typeof(TToolset).FullName,
@@ -41,10 +41,9 @@ namespace TuesPechkin
                 null,
                 null,
                 null,
-                null,
                 null);
 
-            NestedToolset = handle.Unwrap() as IToolset;
+            NestedToolset = (IToolset) handle.Unwrap();
             NestedToolset.Load(Deployment);
             Deployment = NestedToolset.Deployment;
 
