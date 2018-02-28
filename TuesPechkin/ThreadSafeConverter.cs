@@ -20,7 +20,7 @@ namespace TuesPechkin
             {
                 nestingToolset.BeforeUnload += (sender, args) =>
                 {
-                    Invoke((ActionShim)sender);
+                    Invoke((Action)sender);
                 };
             }
         }
@@ -30,12 +30,12 @@ namespace TuesPechkin
             return Invoke(() => base.Convert(document));
         }
 
-        public TResult Invoke<TResult>(FuncShim<TResult> @delegate)
+        public TResult Invoke<TResult>(Func<TResult> func)
         {
             StartThread();
 
             // create the task
-            var task = new Task<TResult>(@delegate);
+            var task = new Task<TResult>(func);
 
             // we don't want the task to be completed before we start waiting for that, so the outer lock
             lock (task)
@@ -60,12 +60,12 @@ namespace TuesPechkin
             }
         }
         
-        public void Invoke(ActionShim @delegate)
+        public void Invoke(Action action)
         {
             StartThread();
 
             // create the task
-            var task = new Task(@delegate);
+            var task = new Task(action);
 
             // we don't want the task to be completed before we start waiting for that, so the outer lock
             lock (task)
@@ -176,27 +176,27 @@ namespace TuesPechkin
 
         private class Task
         {
-            public Task(ActionShim action)
+            public Task(Action action)
             {
                 this.Action = action;
             }
 
-            public virtual ActionShim Action { get; protected set; }
+            public virtual Action Action { get; protected set; }
 
             public Exception Exception { get; set; }
         }
 
         private class Task<TResult> : Task
         {
-            public Task(FuncShim<TResult> @delegate)
+            public Task(Func<TResult> func)
                 : base(null)
             {
-                this.Delegate = @delegate;
+                this.Delegate = func;
                 this.Action = () => this.Result = this.Delegate();
             }
 
             // task code
-            public FuncShim<TResult> Delegate { get; private set; }
+            public Func<TResult> Delegate { get; private set; }
 
             // result, filled out after it's executed
             public TResult Result { get; private set; }

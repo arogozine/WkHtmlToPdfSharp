@@ -84,7 +84,6 @@
     <Compile Include="Util\Tracer.cs" />
     <Compile Include="Document\Unit.cs" />
     <Compile Include="Util\IntCallback.cs" />
-    <Compile Include="Util\RetroDelegates.cs" />
     <Compile Include="Util\StringCallback.cs" />
     <Compile Include="ThreadSafeConverter.cs" />
     <Compile Include="Util\UTF8Marshaller.cs" />

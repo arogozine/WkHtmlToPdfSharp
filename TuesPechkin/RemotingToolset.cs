@@ -86,7 +86,7 @@ namespace TuesPechkin
                 return;
             }
 
-            OnBeforeUnload((ActionShim)(() => NestedToolset.Unload()));
+            OnBeforeUnload((Action)(() => NestedToolset.Unload()));
 
             AppDomain.Unload(remoteDomain);
 

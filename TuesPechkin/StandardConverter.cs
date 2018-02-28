@@ -273,8 +273,8 @@ namespace TuesPechkin
         {
             var type = value.GetType();
             var apply = isGlobal 
-                ? (FuncShim<string, string, int>)((k, v) => Toolset.SetGlobalSetting(config, k, v))
-                : (FuncShim<string, string, int>)((k, v) => Toolset.SetObjectSetting(config, k, v));
+                ? (Func<string, string, int>)((k, v) => Toolset.SetGlobalSetting(config, k, v))
+                : (Func<string, string, int>)((k, v) => Toolset.SetObjectSetting(config, k, v));
 
             if (type == typeof(double))
             {
