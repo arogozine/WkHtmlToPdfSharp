@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading;
-using ErrorEventArgs = TuesPechkin.ErrorEventArgs;
 
 namespace TuesPechkin
 {
