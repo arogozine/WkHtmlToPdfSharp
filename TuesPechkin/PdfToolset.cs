@@ -59,8 +59,7 @@ namespace TuesPechkin
 
         public unsafe string GetVersion()
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + 
-                " Getting WkHtmlToPdf version (" +
+            Tracer.Trace("Getting WkHtmlToPdf version (" +
                 nameof(WkhtmltoxBindings.wkhtmltopdf_version) +
                 ")");
 
@@ -80,27 +79,21 @@ namespace TuesPechkin
 
         public IntPtr CreateGlobalSettings()
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Creating global settings (wkhtmltopdf_create_global_settings)");
+            Tracer.Trace("Creating global settings (wkhtmltopdf_create_global_settings)");
 
             return WkhtmltoxBindings.wkhtmltopdf_create_global_settings();
         }
 
         public IntPtr CreateObjectSettings()
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Creating object settings (wkhtmltopdf_create_object_settings)");
+            Tracer.Trace("Creating object settings (wkhtmltopdf_create_object_settings)");
 
             return WkhtmltoxBindings.wkhtmltopdf_create_object_settings();
         }
 
         public int SetGlobalSetting(IntPtr setting, string name, string value)
         {
-            Tracer.Trace(
-                String.Format(
-                    "T:{0} Setting global setting '{1}' to '{2}' for config {3}",
-                    Thread.CurrentThread.Name,
-                    name,
-                    value,
-                    setting));
+            Tracer.Trace($"Setting global setting '{ name }' to '{ value }' for config { setting }");
 
             var success = WkhtmltoxBindings.wkhtmltopdf_set_global_setting(setting, name, value);
 
@@ -111,7 +104,7 @@ namespace TuesPechkin
 
         public unsafe string GetGlobalSetting(IntPtr setting, string name)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Getting global setting (wkhtmltopdf_get_global_setting)");
+            Tracer.Trace("Getting global setting (wkhtmltopdf_get_global_setting)");
 
             byte[] buf = new byte[2048];
 
@@ -132,13 +125,7 @@ namespace TuesPechkin
 
         public int SetObjectSetting(IntPtr setting, string name, string value)
         {
-            Tracer.Trace(
-                String.Format(
-                    "T:{0} Setting object setting '{1}' to '{2}' for config {3}",
-                    Thread.CurrentThread.Name,
-                    name,
-                    value,
-                    setting));
+            Tracer.Trace($"Setting object setting '{ name }' to '{ value }' for config { setting }");
 
             var success = WkhtmltoxBindings.wkhtmltopdf_set_object_setting(setting, name, value);
 
@@ -149,11 +136,7 @@ namespace TuesPechkin
 
         public unsafe string GetObjectSetting(IntPtr setting, string name)
         {
-            Tracer.Trace(string.Format(
-                "T:{0} Getting object setting '{1}' for config {2}",
-                Thread.CurrentThread.Name,
-                name,
-                setting));
+            Tracer.Trace($"Getting object setting '{ name }' for config { setting }");
 
             byte[] buf = new byte[2048];
 
@@ -174,14 +157,14 @@ namespace TuesPechkin
 
         public IntPtr CreateConverter(IntPtr globalSettings)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Creating converter (wkhtmltopdf_create_converter)");
+            Tracer.Trace("Creating converter (wkhtmltopdf_create_converter)");
 
             return WkhtmltoxBindings.wkhtmltopdf_create_converter(globalSettings);
         }
 
         public void DestroyConverter(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Destroying converter (wkhtmltopdf_destroy_converter)");
+            Tracer.Trace("Destroying converter (wkhtmltopdf_destroy_converter)");
 
             WkhtmltoxBindings.wkhtmltopdf_destroy_converter(converter);
 
@@ -190,7 +173,7 @@ namespace TuesPechkin
 
         public void SetWarningCallback(IntPtr converter, StringCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting warning callback (wkhtmltopdf_set_warning_callback)");
+            Tracer.Trace("Setting warning callback (wkhtmltopdf_set_warning_callback)");
             
             WkhtmltoxBindings.wkhtmltopdf_set_warning_callback(converter, callback);
 
@@ -199,7 +182,7 @@ namespace TuesPechkin
 
         public void SetErrorCallback(IntPtr converter, StringCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting error callback (wkhtmltopdf_set_error_callback)");
+            Tracer.Trace("Setting error callback (wkhtmltopdf_set_error_callback)");
             
             WkhtmltoxBindings.wkhtmltopdf_set_error_callback(converter, callback);
 
@@ -208,7 +191,7 @@ namespace TuesPechkin
 
         public void SetFinishedCallback(IntPtr converter, IntCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting finished callback (wkhtmltopdf_set_finished_callback)");
+            Tracer.Trace("Setting finished callback (wkhtmltopdf_set_finished_callback)");
 
             WkhtmltoxBindings.wkhtmltopdf_set_finished_callback(converter, callback);
 
@@ -217,7 +200,7 @@ namespace TuesPechkin
 
         public void SetPhaseChangedCallback(IntPtr converter, VoidCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting phase change callback (wkhtmltopdf_set_phase_changed_callback)");
+            Tracer.Trace("Setting phase change callback (wkhtmltopdf_set_phase_changed_callback)");
 
             WkhtmltoxBindings.wkhtmltopdf_set_phase_changed_callback(converter, callback);
 
@@ -226,7 +209,7 @@ namespace TuesPechkin
 
         public void SetProgressChangedCallback(IntPtr converter, IntCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting progress change callback (wkhtmltopdf_set_progress_changed_callback)");
+            Tracer.Trace("Setting progress change callback (wkhtmltopdf_set_progress_changed_callback)");
 
             WkhtmltoxBindings.wkhtmltopdf_set_progress_changed_callback(converter, callback);
 
@@ -235,63 +218,63 @@ namespace TuesPechkin
 
         public bool PerformConversion(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Starting conversion (wkhtmltopdf_convert)");
+            Tracer.Trace("Starting conversion (wkhtmltopdf_convert)");
 
             return WkhtmltoxBindings.wkhtmltopdf_convert(converter) != 0;
         }
 
         public void AddObject(IntPtr converter, IntPtr objectConfig, string html)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Adding string object (wkhtmltopdf_add_object)");
+            Tracer.Trace("Adding string object (wkhtmltopdf_add_object)");
 
             WkhtmltoxBindings.wkhtmltopdf_add_object(converter, objectConfig, html);
         }
 
         public void AddObject(IntPtr converter, IntPtr objectConfig, byte[] html)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Adding byte[] object (wkhtmltopdf_add_object)");
+            Tracer.Trace("Adding byte[] object (wkhtmltopdf_add_object)");
 
             WkhtmltoxBindings.wkhtmltopdf_add_object(converter, objectConfig, html);
         }
 
         public int GetPhaseNumber(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting current phase (wkhtmltopdf_current_phase)");
+            Tracer.Trace("Requesting current phase (wkhtmltopdf_current_phase)");
 
             return WkhtmltoxBindings.wkhtmltopdf_current_phase(converter);
         }
 
         public int GetPhaseCount(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting phase count (wkhtmltopdf_phase_count)");
+            Tracer.Trace("Requesting phase count (wkhtmltopdf_phase_count)");
 
             return WkhtmltoxBindings.wkhtmltopdf_phase_count(converter);
         }
 
         public string GetPhaseDescription(IntPtr converter, int phase)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting phase description (wkhtmltopdf_phase_description)");
+            Tracer.Trace("Requesting phase description (wkhtmltopdf_phase_description)");
 
             return Marshal.PtrToStringAnsi(WkhtmltoxBindings.wkhtmltopdf_phase_description(converter, phase));
         }
 
         public string GetProgressDescription(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting progress string (wkhtmltopdf_progress_string)");
+            Tracer.Trace("Requesting progress string (wkhtmltopdf_progress_string)");
 
             return Marshal.PtrToStringAnsi(WkhtmltoxBindings.wkhtmltopdf_progress_string(converter));
         }
 
         public int GetHttpErrorCode(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting http error code (wkhtmltopdf_http_error_code)");
+            Tracer.Trace("Requesting http error code (wkhtmltopdf_http_error_code)");
 
             return WkhtmltoxBindings.wkhtmltopdf_http_error_code(converter);
         }
 
         public byte[] GetConverterResult(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting converter result (wkhtmltopdf_get_output)");
+            Tracer.Trace("Requesting converter result (wkhtmltopdf_get_output)");
 
             var len = WkhtmltoxBindings.wkhtmltopdf_get_output(converter, out IntPtr tmp);
             var output = new byte[len];

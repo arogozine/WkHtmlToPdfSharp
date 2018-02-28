@@ -58,7 +58,7 @@ namespace TuesPechkin
         #region Rest of IToolset stuff
         public IntPtr CreateGlobalSettings()
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Creating global settings (wkhtmltoimage_create_global_settings)");
+            Tracer.Trace("Creating global settings (wkhtmltoimage_create_global_settings)");
 
             return WkhtmltoxBindings.wkhtmltoimage_create_global_settings();
         }
@@ -70,13 +70,7 @@ namespace TuesPechkin
 
         public int SetGlobalSetting(IntPtr setting, string name, string value)
         {
-            Tracer.Trace(
-                String.Format(
-                    "T:{0} Setting global setting '{1}' to '{2}' for config {3}",
-                    Thread.CurrentThread.Name,
-                    name,
-                    value,
-                    setting));
+            Tracer.Trace($"Setting global setting '{ name }' to '{ value }' for config { setting }");
 
             var success = WkhtmltoxBindings.wkhtmltoimage_set_global_setting(setting, name, value);
 
@@ -87,7 +81,7 @@ namespace TuesPechkin
 
         public unsafe string GetGlobalSetting(IntPtr setting, string name)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Getting global setting (wkhtmltoimage_get_global_setting)");
+            Tracer.Trace("Getting global setting (wkhtmltoimage_get_global_setting)");
 
             byte[] buf = new byte[2048];
 
@@ -118,14 +112,14 @@ namespace TuesPechkin
 
         public IntPtr CreateConverter(IntPtr globalSettings)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Creating converter (wkhtmltoimage_create_converter)");
+            Tracer.Trace("Creating converter (wkhtmltoimage_create_converter)");
 
             return WkhtmltoxBindings.wkhtmltoimage_create_converter(globalSettings, null);
         }
 
         public void DestroyConverter(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Destroying converter (wkhtmltoimage_destroy_converter)");
+            Tracer.Trace("Destroying converter (wkhtmltoimage_destroy_converter)");
 
             WkhtmltoxBindings.wkhtmltoimage_destroy_converter(converter);
 
@@ -134,7 +128,7 @@ namespace TuesPechkin
 
         public void SetWarningCallback(IntPtr converter, StringCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting warning callback (wkhtmltoimage_set_warning_callback)");
+            Tracer.Trace("Setting warning callback (wkhtmltoimage_set_warning_callback)");
             
             WkhtmltoxBindings.wkhtmltoimage_set_warning_callback(converter, callback);
 
@@ -143,7 +137,7 @@ namespace TuesPechkin
 
         public void SetErrorCallback(IntPtr converter, StringCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting error callback (wkhtmltoimage_set_error_callback)");
+            Tracer.Trace("Setting error callback (wkhtmltoimage_set_error_callback)");
             
             WkhtmltoxBindings.wkhtmltoimage_set_error_callback(converter, callback);
 
@@ -152,7 +146,7 @@ namespace TuesPechkin
 
         public void SetFinishedCallback(IntPtr converter, IntCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting finished callback (wkhtmltoimage_set_finished_callback)");
+            Tracer.Trace("Setting finished callback (wkhtmltoimage_set_finished_callback)");
 
             WkhtmltoxBindings.wkhtmltoimage_set_finished_callback(converter, callback);
 
@@ -161,7 +155,7 @@ namespace TuesPechkin
 
         public void SetPhaseChangedCallback(IntPtr converter, VoidCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting phase change callback (wkhtmltoimage_set_phase_changed_callback)");
+            Tracer.Trace("Setting phase change callback (wkhtmltoimage_set_phase_changed_callback)");
 
             WkhtmltoxBindings.wkhtmltoimage_set_phase_changed_callback(converter, callback);
 
@@ -170,7 +164,7 @@ namespace TuesPechkin
 
         public void SetProgressChangedCallback(IntPtr converter, IntCallback callback)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Setting progress change callback (wkhtmltoimage_set_progress_changed_callback)");
+            Tracer.Trace("Setting progress change callback (wkhtmltoimage_set_progress_changed_callback)");
 
             WkhtmltoxBindings.wkhtmltoimage_set_progress_changed_callback(converter, callback);
 
@@ -179,7 +173,7 @@ namespace TuesPechkin
 
         public bool PerformConversion(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Starting conversion (wkhtmltoimage_convert)");
+            Tracer.Trace("Starting conversion (wkhtmltoimage_convert)");
 
             return WkhtmltoxBindings.wkhtmltoimage_convert(converter) != 0;
         }
@@ -196,42 +190,42 @@ namespace TuesPechkin
 
         public int GetPhaseNumber(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting current phase (wkhtmltoimage_current_phase)");
+            Tracer.Trace("Requesting current phase (wkhtmltoimage_current_phase)");
 
             return WkhtmltoxBindings.wkhtmltoimage_current_phase(converter);
         }
 
         public int GetPhaseCount(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting phase count (wkhtmltoimage_phase_count)");
+            Tracer.Trace("Requesting phase count (wkhtmltoimage_phase_count)");
 
             return WkhtmltoxBindings.wkhtmltoimage_phase_count(converter);
         }
 
         public string GetPhaseDescription(IntPtr converter, int phase)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting phase description (wkhtmltoimage_phase_description)");
+            Tracer.Trace("Requesting phase description (wkhtmltoimage_phase_description)");
 
             return Marshal.PtrToStringAnsi(WkhtmltoxBindings.wkhtmltoimage_phase_description(converter, phase));
         }
 
         public string GetProgressDescription(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting progress string (wkhtmltoimage_progress_string)");
+            Tracer.Trace("Requesting progress string (wkhtmltoimage_progress_string)");
 
             return Marshal.PtrToStringAnsi(WkhtmltoxBindings.wkhtmltoimage_progress_string(converter));
         }
 
         public int GetHttpErrorCode(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting http error code (wkhtmltoimage_http_error_code)");
+            Tracer.Trace("Requesting http error code (wkhtmltoimage_http_error_code)");
 
             return WkhtmltoxBindings.wkhtmltoimage_http_error_code(converter);
         }
 
         public byte[] GetConverterResult(IntPtr converter)
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name + " Requesting converter result (wkhtmltoimage_get_output)");
+            Tracer.Trace("Requesting converter result (wkhtmltoimage_get_output)");
 
             var len = WkhtmltoxBindings.wkhtmltoimage_get_output(converter, out IntPtr tmp);
             var output = new byte[len];
@@ -241,8 +235,7 @@ namespace TuesPechkin
 
         public unsafe string GetVersion()
         {
-            Tracer.Trace("T:" + Thread.CurrentThread.Name +
-                " Getting WkHtmlToPdf version (" +
+            Tracer.Trace("Getting WkHtmlToPdf version (" +
                 nameof(WkhtmltoxBindings.wkhtmltoimage_version) +
                 ")");
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace TuesPechkin
 {
@@ -11,25 +12,29 @@ namespace TuesPechkin
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Trace(string message)
         {
-            source.TraceInformation(message);
+            source.TraceInformation(
+                "T:" + Thread.CurrentThread.Name + " " + message);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Warn(string message)
         {
-            source.TraceEvent(TraceEventType.Warning, 0, message);
+            source.TraceEvent(TraceEventType.Warning, 0,
+                "T:" + Thread.CurrentThread.Name + " " + message);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Warn(string message, Exception e)
         {
-            source.TraceEvent(TraceEventType.Warning, 0, string.Format(message + "{0}", e));
+            source.TraceEvent(TraceEventType.Warning, 0,
+                $"T:{ Thread.CurrentThread.Name } { message } { e }");
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Critical(string message, Exception e)
         {
-            source.TraceEvent(TraceEventType.Critical, 0, string.Format(message + "{0}", e));
+            source.TraceEvent(TraceEventType.Critical, 0,
+                $"T:{ Thread.CurrentThread.Name } { message } { e }");
         }
     }
 }

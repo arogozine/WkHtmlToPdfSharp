@@ -16,7 +16,7 @@ namespace TuesPechkin
         {
             Toolset = toolset ?? throw new ArgumentNullException(nameof(toolset));
 
-            Tracer.Trace(string.Format("T:{0} Created StandardConverter", Thread.CurrentThread.Name));
+            Tracer.Trace("Created StandardConverter");
         }
 
         public event EventHandler<BeginEventArgs> Begin;
@@ -38,7 +38,7 @@ namespace TuesPechkin
             ProcessingDocument = document;
             var converter = CreateConverter(document);
 
-            Tracer.Trace(string.Format("T:{0} Created converter", Thread.CurrentThread.Name));
+            Tracer.Trace("Created converter");
             
             Toolset.SetErrorCallback(converter, OnError);
             Toolset.SetWarningCallback(converter, OnWarning);
@@ -46,7 +46,7 @@ namespace TuesPechkin
             Toolset.SetProgressChangedCallback(converter, OnProgressChanged);
             Toolset.SetFinishedCallback(converter, OnFinished);
 
-            Tracer.Trace(string.Format("T:{0} Added callbacks to converter", Thread.CurrentThread.Name));
+            Tracer.Trace("Added callbacks to converter");
 
             // run OnBegin
             OnBegin(converter);
@@ -56,7 +56,7 @@ namespace TuesPechkin
             // run conversion process
             if (!Toolset.PerformConversion(converter))
             {
-                Tracer.Trace(string.Format("T:{0} Conversion failed, null returned", Thread.CurrentThread.Name));
+                Tracer.Trace("Conversion failed, null returned");
             }
             else
             {
@@ -64,7 +64,7 @@ namespace TuesPechkin
                 result = Toolset.GetConverterResult(converter);
             }
 
-            Tracer.Trace(string.Format("T:{0} Releasing unmanaged converter", Thread.CurrentThread.Name));
+            Tracer.Trace("Releasing unmanaged converter");
             Toolset.DestroyConverter(converter);
             ProcessingDocument = null;
             return result;
@@ -74,7 +74,7 @@ namespace TuesPechkin
         {
             int expectedPhaseCount = Toolset.GetPhaseCount(converter);
 
-            Tracer.Trace(string.Format("T:{0} Conversion started, {1} phases awaiting", Thread.CurrentThread.Name, expectedPhaseCount));
+            Tracer.Trace("Conversion started, {1} phases awaiting");
 
             try
             {
@@ -91,13 +91,13 @@ namespace TuesPechkin
             }
             catch (Exception e)
             {
-                Tracer.Warn(String.Format("T:{1} Exception in Begin event handler {0}", e, Thread.CurrentThread.Name));
+                Tracer.Warn("Exception in Begin event handler", e);
             }
         }
 
         private void OnError(IntPtr converter, string errorText)
         {
-            Tracer.Warn(string.Format("T:{0} Conversion Error: {1}", Thread.CurrentThread.Name, errorText));
+            Tracer.Warn("Conversion Error: "+ errorText);
 
             try
             {
@@ -114,13 +114,13 @@ namespace TuesPechkin
             }
             catch (Exception e)
             {
-                Tracer.Warn(string.Format("T:{0} Exception in Error event handler", Thread.CurrentThread.Name), e);
+                Tracer.Warn("Exception in Error event handler");
             }
         }
 
         private void OnFinished(IntPtr converter, int success)
         {
-            Tracer.Trace(string.Format("T:{0} Conversion Finished: {1}", Thread.CurrentThread.Name, success != 0 ? "Succeeded" : "Failed"));
+            Tracer.Trace("Conversion Finished: " + (success != 0 ? "Succeeded" : "Failed"));
 
             try
             {
@@ -137,7 +137,7 @@ namespace TuesPechkin
             }
             catch (Exception e)
             {
-                Tracer.Warn(string.Format("T:{0} Exception in Finish event handler", Thread.CurrentThread.Name), e);
+                Tracer.Warn("Exception in Finish event handler");
             }
         }
 
@@ -145,7 +145,7 @@ namespace TuesPechkin
         {
             int phaseNumber = Toolset.GetPhaseNumber(converter);
             string phaseDescription = Toolset.GetPhaseDescription(converter, phaseNumber);
-            Tracer.Trace(string.Format("T:{0} Conversion Phase Changed: #{1} {2}", Thread.CurrentThread.Name, phaseNumber, phaseDescription));
+            Tracer.Trace($"Conversion Phase Changed: #{ phaseNumber } { phaseDescription }");
 
             try
             {
@@ -163,7 +163,7 @@ namespace TuesPechkin
             }
             catch (Exception e)
             {
-                Tracer.Warn(string.Format("T:{0} Exception in PhaseChange event handler", Thread.CurrentThread.Name), e);
+                Tracer.Warn("Exception in PhaseChange event handler");
             }
         }
 
@@ -171,7 +171,7 @@ namespace TuesPechkin
         {
             string progressDescription = Toolset.GetProgressDescription(converter);
 
-            Tracer.Trace(string.Format("T:{0} Conversion Progress Changed: ({1}) {2}", Thread.CurrentThread.Name, progress, progressDescription));
+            Tracer.Trace($"Conversion Progress Changed: ({ progress }) { progressDescription }");
 
             try
             {
@@ -186,13 +186,13 @@ namespace TuesPechkin
             }
             catch (Exception e)
             {
-                Tracer.Warn(string.Format("T:{0} Exception in Progress event handler", Thread.CurrentThread.Name), e);
+                Tracer.Warn("Exception in Progress event handler");
             }
         }
 
         private void OnWarning(IntPtr converter, string warningText)
         {
-            Tracer.Warn(string.Format("T:{0} Conversion Warning: {1}", Thread.CurrentThread.Name, warningText));
+            Tracer.Warn("Conversion Warning: " + warningText);
 
             try
             {
@@ -209,7 +209,7 @@ namespace TuesPechkin
             }
             catch (Exception e)
             {
-                Tracer.Warn(string.Format("T:{0} Exception in Warning event handler", Thread.CurrentThread.Name), e);
+                Tracer.Warn("Exception in Warning event handler");
             }
         }
 
