@@ -20,7 +20,7 @@ namespace TuesPechkin
             {
                 nestingToolset.BeforeUnload += (sender, args) =>
                 {
-                    Invoke(sender as ActionShim);
+                    Invoke((ActionShim)sender);
                 };
             }
         }
